@@ -92,6 +92,6 @@ $RECYCLE.BIN/
 
 #Others
 
-.elf
-.list
-.img
+*.elf
+*.list
+*.img

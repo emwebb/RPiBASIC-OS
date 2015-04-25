@@ -13,17 +13,17 @@ struct lcdInfo lcd;
 int os_start ( void )
 {
 
-    lcd.rs = 4;
-    lcd.e = 9;
-    lcd.db[0] = 24 ;
-    lcd.db[1] = 25 ;
-    lcd.db[2] = 8 ;
-    lcd.db[3] = 7 ;
+    lcd.rs = 7;
+    lcd.e = 8;
+    lcd.db[0] = 25 ;
+    lcd.db[1] = 24 ;
+    lcd.db[2] = 23 ;
+    lcd.db[3] = 18 ;
 
-    gpio_setOutput(lcd.db[0]);
+    //gpio_setOutput(lcd.db[0]);
     //gpio_outputSet(lcd.db[0]);
 
-/*
+
     gpio_setOutput(lcd.rs);
     gpio_setOutput(lcd.e);
     gpio_setOutput(lcd.db[0]);
@@ -31,9 +31,22 @@ int os_start ( void )
     gpio_setOutput(lcd.db[2]);
     gpio_setOutput(lcd.db[3]);
 
+    gpio_outputSet(7);
+    timer_sleep(1000000);
+    gpio_outputSet(8);
+    timer_sleep(1000000);
+    gpio_outputSet(25);
+    timer_sleep(1000000);
+    gpio_outputSet(24);
+    timer_sleep(1000000);
+    gpio_outputSet(23);
+    timer_sleep(1000000);
+    gpio_outputSet(18);
+    timer_sleep(1000000);
+
   //  gpio_outputSet(lcd.e);
-    lcd_clear(&lcd);
-    lcd_write(&lcd,&"Hello World!");*/
+  //  lcd_clear(&lcd);
+  //  lcd_write(&lcd,&"Hello World!");
 
 
 
