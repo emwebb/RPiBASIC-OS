@@ -27,7 +27,10 @@ gpio.o : gpio.c
 lcd.o : lcd.c
 	$(ARMGNU)-gcc $(COPS) -c lcd.c -o lcd.o
 
-kernel.img : memmap startA.o main.o timer.o gpio.o lcd.o
-	$(ARMGNU)-ld startA.o main.o timer.o gpio.o lcd.o -T memmap -o kernal.elf
+memory.o : memory.c
+	$(ARMGNU)-gcc $(COPS) -c memory.c -o memory.o
+
+kernel.img : memmap startA.o main.o timer.o gpio.o lcd.o memory.o
+	$(ARMGNU)-ld startA.o main.o timer.o gpio.o lcd.o memory.o -T memmap -o kernal.elf
 	$(ARMGNU)-objdump -D kernal.elf > kernal.list
 	$(ARMGNU)-objcopy kernal.elf -O binary kernel.img

@@ -47,7 +47,7 @@ void lcd_write(struct lcdInfo* lcdinfo , char* message) {
 
 void lcd_cmd(struct lcdInfo* lcdinfo ,unsigned char data, unsigned int char_mode) {
 
-  timer_sleep(100000);
+  timer_sleep(1000);
 
   if(char_mode) {
     gpio_outputSet(lcdinfo->rs);
@@ -64,14 +64,13 @@ void lcd_cmd(struct lcdInfo* lcdinfo ,unsigned char data, unsigned int char_mode
 
   for(n = 0; n < 4; n++) {
     if(data & (0b1 << n)) {
-      gpio_outputSet(lcdinfo->db[n]);
+      gpio_outputSet(lcdinfo->db[n + 4]);
     }
   }
-  timer_sleep(50000);
   gpio_outputSet(lcdinfo->e);
-  timer_sleep(50000);
+  timer_sleep(500);
   gpio_outputClr(lcdinfo->e);
-  timer_sleep(50000);
+  timer_sleep(500);
 
   gpio_outputClr(lcdinfo->db[0]);
   gpio_outputClr(lcdinfo->db[1]);
@@ -79,14 +78,13 @@ void lcd_cmd(struct lcdInfo* lcdinfo ,unsigned char data, unsigned int char_mode
   gpio_outputClr(lcdinfo->db[3]);
 
   for(n = 0; n < 4; n++) {
-    if(data & (0b1 << (n + 4))) {
+    if(data & (0b1 << (n))) {
       gpio_outputSet(lcdinfo->db[n]);
     }
   }
 
-  timer_sleep(50000);
   gpio_outputSet(lcdinfo->e);
-  timer_sleep(50000);
+  timer_sleep(500);
   gpio_outputClr(lcdinfo->e);
-  timer_sleep(50000);
+  timer_sleep(500);
 }

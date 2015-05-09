@@ -63,11 +63,8 @@ void gpio_outputSet(unsigned int gpioNum) {
   //Calculate the flag for the specific gpioNum
   unsigned int setFlag = 0b1 << memPart;
 
-  //Add it to bytes
-  bytes = bytes | setFlag;
-
   //Set the relevnat memory.
-  *gpio_SetPointer = bytes;
+  *gpio_SetPointer = setFlag;
 
 
 
@@ -93,11 +90,8 @@ void gpio_outputClr(unsigned int gpioNum) {
   //Calculate the flag for the specific gpioNum
   unsigned int setFlag = 0b1 << memPart;
 
-  //Add it to bytes
-  bytes = bytes | setFlag;
-
   //Set the relevnat memory.
-  *gpio_SetPointer = bytes;
+  *gpio_SetPointer = setFlag;
 
 }
 

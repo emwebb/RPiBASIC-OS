@@ -13,6 +13,8 @@ struct lcdInfo lcd;
 int os_start ( void )
 {
 
+    timer_sleep(1000000);
+
     lcd.rs = 7;
     lcd.e = 8;
     lcd.db[0] = 25 ;
@@ -31,7 +33,7 @@ int os_start ( void )
     gpio_setOutput(lcd.db[2]);
     gpio_setOutput(lcd.db[3]);
 
-    gpio_outputSet(7);
+  /*  gpio_outputSet(7);
     timer_sleep(1000000);
     gpio_outputSet(8);
     timer_sleep(1000000);
@@ -42,11 +44,11 @@ int os_start ( void )
     gpio_outputSet(23);
     timer_sleep(1000000);
     gpio_outputSet(18);
-    timer_sleep(1000000);
+    timer_sleep(1000000);*/
 
   //  gpio_outputSet(lcd.e);
-  //  lcd_clear(&lcd);
-  //  lcd_write(&lcd,&"Hello World!");
+    lcd_clear(&lcd);
+    lcd_write(&lcd,&"Hello World!");
 
 
 
