@@ -52,8 +52,8 @@ Disassembly of section .text:
     8090:	eb0000cb 	bl	83c4 <lcd_write>
     8094:	eafffffe 	b	8094 <os_start+0x78>
     8098:	000f4240 	andeq	r4, pc, r0, asr #4
-    809c:	00008504 	andeq	r8, r0, r4, lsl #10
-    80a0:	000084f4 	strdeq	r8, [r0], -r4
+    809c:	00008518 	andeq	r8, r0, r8, lsl r5
+    80a0:	00008508 	andeq	r8, r0, r8, lsl #10
 
 000080a4 <timer_sleep>:
     80a4:	e92d4038 	push	{r3, r4, r5, lr}
@@ -69,7 +69,7 @@ Disassembly of section .text:
     80cc:	8afffffa 	bhi	80bc <timer_sleep+0x18>
     80d0:	e8bd4038 	pop	{r3, r4, r5, lr}
     80d4:	e12fff1e 	bx	lr
-    80d8:	20003000 	andcs	r3, r0, r0
+    80d8:	3f003000 	svccc	0x00003000
 
 000080dc <gpio_setOutput>:
     80dc:	e3500035 	cmp	r0, #53	; 0x35
@@ -105,13 +105,13 @@ Disassembly of section .text:
     8154:	e59f301c 	ldr	r3, [pc, #28]	; 8178 <gpio_setOutput+0x9c>
     8158:	91a03002 	movls	r3, r2
     815c:	eaffffe3 	b	80f0 <gpio_setOutput+0x14>
-    8160:	20200000 	eorcs	r0, r0, r0
+    8160:	3f200000 	svccc	0x00200000
     8164:	cccccccd 	stclgt	12, cr12, [ip], {205}	; 0xcd
-    8168:	20200004 	eorcs	r0, r0, r4
-    816c:	20200008 	eorcs	r0, r0, r8
-    8170:	2020000c 	eorcs	r0, r0, ip
-    8174:	20200010 	eorcs	r0, r0, r0, lsl r0
-    8178:	20200014 	eorcs	r0, r0, r4, lsl r0
+    8168:	3f200004 	svccc	0x00200004
+    816c:	3f200008 	svccc	0x00200008
+    8170:	3f20000c 	svccc	0x0020000c
+    8174:	3f200010 	svccc	0x00200010
+    8178:	3f200014 	svccc	0x00200014
 
 0000817c <gpio_outputSet>:
     817c:	e3500035 	cmp	r0, #53	; 0x35
@@ -124,8 +124,8 @@ Disassembly of section .text:
     8198:	959f3008 	ldrls	r3, [pc, #8]	; 81a8 <gpio_outputSet+0x2c>
     819c:	e5830000 	str	r0, [r3]
     81a0:	e12fff1e 	bx	lr
-    81a4:	20200020 	eorcs	r0, r0, r0, lsr #32
-    81a8:	2020001c 	eorcs	r0, r0, ip, lsl r0
+    81a4:	3f200020 	svccc	0x00200020
+    81a8:	3f20001c 	svccc	0x0020001c
 
 000081ac <gpio_outputClr>:
     81ac:	e3500035 	cmp	r0, #53	; 0x35
@@ -138,8 +138,8 @@ Disassembly of section .text:
     81c8:	959f3008 	ldrls	r3, [pc, #8]	; 81d8 <gpio_outputClr+0x2c>
     81cc:	e5830000 	str	r0, [r3]
     81d0:	e12fff1e 	bx	lr
-    81d4:	2020002c 	eorcs	r0, r0, ip, lsr #32
-    81d8:	20200028 	eorcs	r0, r0, r8, lsr #32
+    81d4:	3f20002c 	svccc	0x0020002c
+    81d8:	3f200028 	svccc	0x00200028
 
 000081dc <gpio_setInput>:
     81dc:	e3500035 	cmp	r0, #53	; 0x35
@@ -175,13 +175,13 @@ Disassembly of section .text:
     8254:	e59f301c 	ldr	r3, [pc, #28]	; 8278 <gpio_setInput+0x9c>
     8258:	91a03002 	movls	r3, r2
     825c:	eaffffe3 	b	81f0 <gpio_setInput+0x14>
-    8260:	20200000 	eorcs	r0, r0, r0
+    8260:	3f200000 	svccc	0x00200000
     8264:	cccccccd 	stclgt	12, cr12, [ip], {205}	; 0xcd
-    8268:	20200004 	eorcs	r0, r0, r4
-    826c:	20200008 	eorcs	r0, r0, r8
-    8270:	2020000c 	eorcs	r0, r0, ip
-    8274:	20200010 	eorcs	r0, r0, r0, lsl r0
-    8278:	20200014 	eorcs	r0, r0, r4, lsl r0
+    8268:	3f200004 	svccc	0x00200004
+    826c:	3f200008 	svccc	0x00200008
+    8270:	3f20000c 	svccc	0x0020000c
+    8274:	3f200010 	svccc	0x00200010
+    8278:	3f200014 	svccc	0x00200014
 
 0000827c <gpio_inputGet>:
     827c:	e3500035 	cmp	r0, #53	; 0x35
@@ -194,8 +194,8 @@ Disassembly of section .text:
     8298:	e5900000 	ldr	r0, [r0]
     829c:	e12fff1e 	bx	lr
     82a0:	e12fff1e 	bx	lr
-    82a4:	20200034 	eorcs	r0, r0, r4, lsr r0
-    82a8:	20200028 	eorcs	r0, r0, r8, lsr #32
+    82a4:	3f200034 	svccc	0x00200034
+    82a8:	3f200028 	svccc	0x00200028
 
 000082ac <lcd_cmd>:
     82ac:	e92d41f0 	push	{r4, r5, r6, r7, r8, lr}
@@ -351,17 +351,32 @@ Disassembly of section .text:
     84ec:	e8bd4030 	pop	{r4, r5, lr}
     84f0:	e12fff1e 	bx	lr
 
+000084f4 <mem_init>:
+    84f4:	e12fff1e 	bx	lr
+
+000084f8 <malloc>:
+    84f8:	e12fff1e 	bx	lr
+
+000084fc <calloc>:
+    84fc:	e12fff1e 	bx	lr
+
+00008500 <realloc>:
+    8500:	e12fff1e 	bx	lr
+
+00008504 <free>:
+    8504:	e12fff1e 	bx	lr
+
 Disassembly of section .rodata.str1.4:
 
-000084f4 <.rodata.str1.4>:
-    84f4:	6c6c6548 	cfstr64vs	mvdx6, [ip], #-288	; 0xfffffee0
-    84f8:	6f57206f 	svcvs	0x0057206f
-    84fc:	21646c72 	smccs	18114	; 0x46c2
-    8500:	00000000 	andeq	r0, r0, r0
+00008508 <.rodata.str1.4>:
+    8508:	6c6c6548 	cfstr64vs	mvdx6, [ip], #-288	; 0xfffffee0
+    850c:	6f57206f 	svcvs	0x0057206f
+    8510:	21646c72 	smccs	18114	; 0x46c2
+    8514:	00000000 	andeq	r0, r0, r0
 
 Disassembly of section .bss:
 
-00008504 <lcd>:
+00008518 <lcd>:
 	...
 
 Disassembly of section .ARM.attributes:
@@ -383,7 +398,7 @@ Disassembly of section .ARM.attributes:
 Disassembly of section .comment:
 
 00000000 <.comment>:
-   0:	3a434347 	bcc	10d0d24 <lcd+0x10c8820>
+   0:	3a434347 	bcc	10d0d24 <lcd+0x10c880c>
    4:	4e472820 	cdpmi	8, 4, cr2, cr7, cr0, {1}
    8:	6f542055 	svcvs	0x00542055
    c:	20736c6f 	rsbscs	r6, r3, pc, ror #24
@@ -401,7 +416,7 @@ Disassembly of section .comment:
   3c:	6c657228 	sfmvs	f7, 2, [r5], #-160	; 0xffffff60
   40:	65736165 	ldrbvs	r6, [r3, #-357]!	; 0x165
   44:	415b2029 	cmpmi	fp, r9, lsr #32
-  48:	652f4d52 	strvs	r4, [pc, #-3410]!	; fffff2fe <lcd+0xffff6dfa>
+  48:	652f4d52 	strvs	r4, [pc, #-3410]!	; fffff2fe <lcd+0xffff6de6>
   4c:	6465626d 	strbtvs	r6, [r5], #-621	; 0x26d
   50:	2d646564 	cfstr64cs	mvdx6, [r4, #-400]!	; 0xfffffe70
   54:	2d375f34 	ldccs	15, cr5, [r7, #-208]!	; 0xffffff30
