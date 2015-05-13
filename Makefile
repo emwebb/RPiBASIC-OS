@@ -1,6 +1,6 @@
 ARMGNU ?= arm-none-eabi
 
-COPS = -Wall -O2 -nostdlib -nostartfiles -ffreestanding
+COPS = -Wall -O2 -nostdlib -nostartfiles -ffreestanding -D RPI2
 
 all : kernel.img
 
@@ -12,8 +12,8 @@ clean :
 	rm -f *.img
 	rm -f *.hex
 
-startA.o : startA.s
-	$(ARMGNU)-as startA.s -o startA.o
+start.o : start.s
+	$(ARMGNU)-as start.s -o startA.o
 
 main.o : main.c
 	$(ARMGNU)-gcc $(COPS) -c main.c -o main.o
@@ -30,7 +30,7 @@ lcd.o : lcd.c
 memory.o : memory.c
 	$(ARMGNU)-gcc $(COPS) -c memory.c -o memory.o
 
-kernel.img : memmap startA.o main.o timer.o gpio.o lcd.o memory.o
-	$(ARMGNU)-ld startA.o main.o timer.o gpio.o lcd.o memory.o -T memmap -o kernal.elf
+kernel.img : memmap start.o main.o timer.o gpio.o lcd.o memory.o
+	$(ARMGNU)-ld start.o main.o timer.o gpio.o lcd.o memory.o -T memmap -o kernal.elf
 	$(ARMGNU)-objdump -D kernal.elf > kernal.list
 	$(ARMGNU)-objcopy kernal.elf -O binary kernel.img
