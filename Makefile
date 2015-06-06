@@ -13,7 +13,7 @@ clean :
 	rm -f *.hex
 
 start.o : start.s
-	$(ARMGNU)-as start.s -o startA.o
+	$(ARMGNU)-as start.s -o start.o
 
 main.o : main.c
 	$(ARMGNU)-gcc $(COPS) -c main.c -o main.o

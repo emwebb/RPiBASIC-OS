@@ -86,12 +86,14 @@
 
 #endif
 
+#define GPIO_PULL_OFF 0X0
 #define GPIO_PULL_UP 0X1
 #define GPIO_PULL_DOWN 0X2
 
 
 void gpio_setOutput(unsigned int gpioNum);
-void gpio_setInput(unsigned int gpioNum, unsigned int pull);
+void gpio_setInput(unsigned int gpioNum);
+void gpio_setPUD(unsigned int gpioNum,unsigned int pud);
 unsigned int gpio_inputGet(unsigned int gpioNum);
 void gpio_outputSet(unsigned int gpioNum);
 void gpio_outputClr(unsigned int gpioNum);

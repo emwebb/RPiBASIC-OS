@@ -17,4 +17,4 @@
 #endif
 
 
-void timer_sleep(unsigned int time);
+void timer_sleep(unsigned long time);

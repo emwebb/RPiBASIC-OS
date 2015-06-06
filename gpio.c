@@ -1,4 +1,5 @@
 #include "gpio.h"
+#include "timer.h"
 
 void gpio_setOutput(unsigned int gpioNum) {
   //Check if the value is valid
@@ -96,7 +97,7 @@ void gpio_outputClr(unsigned int gpioNum) {
 }
 
 
-void gpio_setInput(unsigned int gpioNum, unsigned int pull) {
+void gpio_setInput(unsigned int gpioNum) {
 
   if(gpioNum > 53) {
     return;
@@ -161,8 +162,40 @@ unsigned int gpio_inputGet(unsigned int gpioNum) {
   unsigned int setFlag = 0b1 << (memPart +0);
 
   //Remove the other values
-  //bytes = bytes & setFlag;
+  bytes = bytes & setFlag;
 
   return bytes;
+
+}
+
+void gpio_setPUD(unsigned int gpioNum,unsigned int pud) {
+  unsigned int* pudRegister = GPPUD;
+  *pudRegister = pud;
+
+  timer_sleep(20);
+
+  unsigned int* gpio_SetPointer = 0;
+  unsigned int memPart = 0;
+
+  //Figure out which part of the memory relates to gpioNum
+  if(gpioNum < 32) {
+    gpio_SetPointer = GPPUDCLK0;
+    memPart = gpioNum;
+  } else {
+    gpio_SetPointer = GPPUDCLK1;
+    memPart = gpioNum - 32;
+  }
+
+  unsigned int setFlag = 0b1 << memPart;
+
+  //Set the relevnat memory.
+  *gpio_SetPointer = setFlag;
+
+  timer_sleep(20);
+
+  *pudRegister = 0;
+  *gpio_SetPointer = 0;
+
+
 
 }
