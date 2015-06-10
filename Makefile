@@ -30,7 +30,13 @@ lcd.o : lcd.c
 memory.o : memory.c
 	$(ARMGNU)-gcc $(COPS) -c memory.c -o memory.o
 
-kernel.img : memmap start.o main.o timer.o gpio.o lcd.o memory.o
-	$(ARMGNU)-ld start.o main.o timer.o gpio.o lcd.o memory.o -T memmap -o kernal.elf
+mailbox.o : mailbox.c
+	$(ARMGNU)-gcc $(COPS) -c mailbox.c -o mailbox.o
+
+framebuffer.o : framebuffer.c
+	$(ARMGNU)-gcc $(COPS) -c framebuffer.c -o framebuffer.o
+
+kernel.img : memmap start.o main.o timer.o gpio.o lcd.o memory.o mailbox.o framebuffer.o
+	$(ARMGNU)-ld start.o main.o timer.o gpio.o lcd.o memory.o mailbox.o framebuffer.o -T memmap -o kernal.elf
 	$(ARMGNU)-objdump -D kernal.elf > kernal.list
 	$(ARMGNU)-objcopy kernal.elf -O binary kernel.img
